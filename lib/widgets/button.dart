@@ -25,6 +25,7 @@ class ButtonWidget extends StatelessWidget {
           horizontal: defaultPadding * 1.5,
           vertical: defaultPadding / (Responsive.isDesktop(context) ? 1 : 2),
         ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       onPressed: () {
         onPressed();
@@ -32,8 +33,14 @@ class ButtonWidget extends StatelessWidget {
       icon: Icon(
         icon,
         size: 20,
+        color: Theme.of(context).colorScheme.background,
       ),
-      label: Text(text),
+      label: Text(
+        text,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.background,
+        ),
+      ),
     );
   }
 }
