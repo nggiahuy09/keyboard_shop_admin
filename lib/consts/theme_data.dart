@@ -10,6 +10,7 @@ class Styles {
       colorScheme: ThemeData().colorScheme.copyWith(
             secondary: isDarkTheme ? const Color(0xFF1a1f3c) : const Color(0xFFE9FCFC),
             brightness: isDarkTheme ? Brightness.dark : Brightness.light,
+            onBackground: isDarkTheme ? const Color(0xFFE9FCFC) : const Color(0xFF1a1f3c),
           ),
       cardColor: isDarkTheme ? const Color(0xFF0a0d2c) : const Color(0xFFF2FDFD),
       canvasColor: isDarkTheme ? Colors.black : Colors.grey[50],
