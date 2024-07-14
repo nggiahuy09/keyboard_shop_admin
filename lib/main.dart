@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
         builder: (context, themeProvider, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Grocery',
+            title: 'KB Shop Admin',
             theme: Styles.themeData(themeProvider.getDarkTheme, context),
             home: const MainScreen(),
           );
