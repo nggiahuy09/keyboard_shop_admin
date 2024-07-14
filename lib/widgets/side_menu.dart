@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:kb_shop_admin/provider/dark_theme_provider.dart';
+import 'package:kb_shop_admin/screens/all_orders_page.dart';
+import 'package:kb_shop_admin/screens/all_products_page.dart';
 import 'package:kb_shop_admin/screens/main_page.dart';
 import 'package:kb_shop_admin/services/utils.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +28,7 @@ class _SideMenuWidgetSate extends State<SideMenuWidget> {
         children: [
           DrawerHeader(
             child: Image.asset(
-              "assets/images/groceries.png",
+              "assets/icons/app_icon.png",
             ),
           ),
           DrawerListTileWidget(
@@ -42,12 +44,24 @@ class _SideMenuWidgetSate extends State<SideMenuWidget> {
           ),
           DrawerListTileWidget(
             title: "View all product",
-            press: () {},
+            press: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const AllProductsScreen(),
+                ),
+              );
+            },
             icon: Icons.store,
           ),
           DrawerListTileWidget(
             title: "View all order",
-            press: () {},
+            press: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const AllOrdersScreen(),
+                ),
+              );
+            },
             icon: IconlyBold.bag_2,
           ),
           SwitchListTile(
@@ -80,20 +94,19 @@ class DrawerListTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Utils(context).getTheme;
-    final color = theme == true ? Colors.white : Colors.black;
-
     return ListTile(
       onTap: press,
-      horizontalTitleGap: 0.0,
+      horizontalTitleGap: 8.0,
       leading: Icon(
         icon,
-        size: 18,
+        size: 20,
       ),
+
       title: Text(
         title,
-        style: TextStyle(
-          color: color,
+        style: const TextStyle(
+          fontSize: 18,
+          color: Colors.black,
         ),
       ),
     );
