@@ -32,7 +32,7 @@ class _SideMenuWidgetSate extends State<SideMenuWidget> {
             ),
           ),
           DrawerListTileWidget(
-            title: "Main",
+            title: "Dashboard",
             press: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
