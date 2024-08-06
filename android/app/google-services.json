@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "171017960924",
+    "project_id": "kb-shop-d3216",
+    "storage_bucket": "kb-shop-d3216.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171017960924:android:0d6690d2adbe9228daa319",
+        "android_client_info": {
+          "package_name": "com.example.kb_shop_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClHxKi113FmbX2VLBH3XIbtZyO5RHIigc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
