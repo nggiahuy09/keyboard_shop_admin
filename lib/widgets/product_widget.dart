@@ -1,8 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kb_shop_admin/consts/constants.dart';
+import 'package:kb_shop_admin/model/product_model.dart';
 import 'package:kb_shop_admin/responsive.dart';
-import 'package:kb_shop_admin/services/firebase_services.dart';
+import 'package:kb_shop_admin/screens/inner_screens/edit_product.dart';
 import 'package:kb_shop_admin/services/utils.dart';
 import 'package:kb_shop_admin/widgets/custom_widget/cus_loading_widget.dart';
 
@@ -20,52 +20,27 @@ class ProductWidget extends StatefulWidget {
 
 class _ProductWidgetState extends State<ProductWidget> {
   bool _isLoading = false;
-
-  String title = '';
-  String imageUrl = '';
-  String category = '';
-  String price = '0.0';
-  String salePrice = '0.0';
-  String quantity = '0';
-  bool isOnSale = false;
+  ProductModel? product;
 
   @override
   void initState() {
+    getProductInformation();
     super.initState();
-    getProductInfor();
   }
 
-  Future<void> getProductInfor() async {
+  void getProductInformation() async {
     setState(() {
       _isLoading = true;
     });
 
-    try {
-      final DocumentSnapshot documentSnapshot = await fireStoreInstance.collection('products').doc(widget.productId).get();
-      if (documentSnapshot.exists) {
-        title = documentSnapshot.get('title');
-        imageUrl = documentSnapshot.get('image_url');
-        category = documentSnapshot.get('category');
-        price = documentSnapshot.get('price');
-        salePrice = documentSnapshot.get('sale_price');
-        quantity = documentSnapshot.get('quantity');
-        isOnSale = documentSnapshot.get('isOnSale');
+    product = await Utils.getProductInfor(productId: widget.productId);
 
-        setState(() {
-          _isLoading = false;
-        });
-      } else {
-        setState(() {
-          _isLoading = false;
-        });
-        return;
-      }
-    } catch (err) {
-      Utils.showToast(msg: err.toString());
+    if (product != null) {
       setState(() {
         _isLoading = false;
       });
-    } finally {
+    } else {
+      Utils.showToast(msg: 'Occur Error When Getting Product Information');
       setState(() {
         _isLoading = false;
       });
@@ -98,7 +73,13 @@ class _ProductWidgetState extends State<ProductWidget> {
                   itemBuilder: (context) {
                     return [
                       PopupMenuItem(
-                        onTap: () {},
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return EditProductScreen(productId: widget.productId);
+                            },
+                          ),
+                        ),
                         value: 1,
                         child: const Text('Edit'),
                       ),
@@ -128,7 +109,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          title,
+                          product != null ? product!.title : 'null',
                           style: TextStyle(
                             // fontSize: 20,
                             fontWeight: FontWeight.w600,
@@ -140,16 +121,20 @@ class _ProductWidgetState extends State<ProductWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              isOnSale ? salePrice.toString() : price.toString(),
+                              product != null
+                                  ? product!.isOnSale
+                                      ? product!.salePrice.toString()
+                                      : product!.price.toString()
+                                  : 'null',
                               style: TextStyle(
                                 // fontSize: 18,
                                 fontWeight: FontWeight.w500,
                                 color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
                               ),
                             ),
-                            if (isOnSale)
+                            if (product != null ? product!.isOnSale : false)
                               Text(
-                                price.toString(),
+                                product!.price.toString(),
                                 style: TextStyle(
                                   // fontSize: 18,
                                   fontWeight: FontWeight.w500,
@@ -160,7 +145,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                           ],
                         ),
                         Text(
-                          category,
+                          product != null ? product!.category : 'null',
                           style: TextStyle(
                             // fontSize: 18,
                             fontWeight: FontWeight.w500,

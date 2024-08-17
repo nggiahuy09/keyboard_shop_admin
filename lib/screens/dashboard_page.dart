@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kb_shop_admin/consts/constants.dart';
 import 'package:kb_shop_admin/controllers/menu_controller.dart';
 import 'package:kb_shop_admin/responsive.dart';
+import 'package:kb_shop_admin/screens/all_products_page.dart';
 import 'package:kb_shop_admin/screens/inner_screens/add_product.dart';
 import 'package:kb_shop_admin/services/utils.dart';
 import 'package:kb_shop_admin/widgets/button.dart';
@@ -51,7 +52,7 @@ class DashboardScreen extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) {
-                                      return const AddProductScreen();
+                                      return const AllProductsScreen();
                                     },
                                   ));
                                 },
