@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,7 +29,7 @@ class AddProductScreen extends StatefulWidget {
 class _AddProductScreenState extends State<AddProductScreen> {
   final _addProductKey = GlobalKey<FormState>();
 
-  late final TextEditingController _titleController, _priceController, _quantityController;
+  late final TextEditingController _titleController, _priceController, _quantityController, _salePriceController;
 
   String _categoryValue = 'Keyboard';
   File? _pickedImage;
@@ -68,10 +69,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
           'id': uuidV4,
           'title': _titleController.text.trim(),
           'price': _priceController.text.trim(),
-          'sale_price': '0',
+          'sale_price': _salePriceController.text.trim().isEmpty ? '0.0': _salePriceController.text.trim(),
           'image_url': imageUrl,
           'category': _categoryValue,
-          'isOnSale': false,
+          'isOnSale': _salePriceController.text.trim().isNotEmpty,
           'quantity': _quantityController.text.trim(),
           'last_modify': Timestamp.now(),
         });
@@ -103,7 +104,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     _titleController = TextEditingController();
     _priceController = TextEditingController();
     _quantityController = TextEditingController();
-
+    _salePriceController = TextEditingController();
     super.initState();
   }
 
@@ -112,7 +113,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     _titleController.dispose();
     _priceController.dispose();
     _quantityController.dispose();
-
+    _salePriceController.dispose();
     super.dispose();
   }
 
@@ -120,6 +121,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
     _titleController.clear();
     _priceController.clear();
     _quantityController.clear();
+    _salePriceController.clear();
+    _pickedImage = null;
+    _webImage = null;
   }
 
   Future<void> _pickImage() async {
@@ -274,6 +278,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                           scaffoldColor: scaffoldColor,
                                           borderSideColor: color,
                                           validate: (value) => value!.isEmpty ? 'Price is missed!' : null,
+                                          inputFormatter: <TextInputFormatter>[
+                                            Utils(context).numberInputFormatter,
+                                          ],
+                                        ),
+                                        const SizedBox(height: 16),
+
+                                        _InputField(
+                                          title: 'Sale Price',
+                                          textEditingController: _salePriceController,
+                                          scaffoldColor: scaffoldColor,
+                                          borderSideColor: color,
+                                          validate: (value) => null,
                                           inputFormatter: <TextInputFormatter>[
                                             Utils(context).numberInputFormatter,
                                           ],
