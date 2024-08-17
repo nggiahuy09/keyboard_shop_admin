@@ -33,7 +33,7 @@ class DashboardScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  flex: 5,
+                  flex: 10,
                   child: Column(
                     children: [
                       Column(
@@ -82,11 +82,11 @@ class DashboardScreen extends StatelessWidget {
                         mobile: ProductsGridWidget(
                           isInMain: true,
                           crossAxisCount: Responsive.isMobile(context) ? 2 : 4,
-                          childAspectRatio: Responsive.isMobile(context) ? 1.3 : 0.7,
+                          childAspectRatio: Responsive.isMobile(context) ? 1.1 : 0.9,
                         ),
                         desktop: ProductsGridWidget(
                           isInMain: true,
-                          childAspectRatio: size.width < 1400 ? 0.9 : 1.08,
+                          childAspectRatio: size.width < 1400 ? 0.7 : 0.95,
                         ),
                       ),
                       const SizedBox(height: defaultPadding),

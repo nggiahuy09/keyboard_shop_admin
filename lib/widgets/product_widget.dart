@@ -20,6 +20,8 @@ class ProductWidget extends StatefulWidget {
 
 class _ProductWidgetState extends State<ProductWidget> {
   bool _isLoading = false;
+
+  String _imageUrl = 'assets/images/empty_image.png';
   ProductModel? product;
 
   @override
@@ -38,6 +40,7 @@ class _ProductWidgetState extends State<ProductWidget> {
     if (product != null) {
       setState(() {
         _isLoading = false;
+        _imageUrl = product!.imageUrl;
       });
     } else {
       Utils.showToast(msg: 'Occur Error When Getting Product Information');
@@ -53,112 +56,112 @@ class _ProductWidgetState extends State<ProductWidget> {
 
     return CusLoadingWidget(
       isLoading: _isLoading,
-      child: GestureDetector(
-        onTap: () {},
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: defaultPadding / 2,
-            vertical: defaultPadding,
-          ),
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Stack(
-            children: [
-              Positioned(
-                right: 0,
-                top: 0,
-                child: PopupMenuButton(
-                  itemBuilder: (context) {
-                    return [
-                      PopupMenuItem(
-                        onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return EditProductScreen(productId: widget.productId);
-                            },
-                          ),
-                        ),
-                        value: 1,
-                        child: const Text('Edit'),
-                      ),
-                      PopupMenuItem(
-                        onTap: () {},
-                        value: 2,
-                        child: const Text(
-                          'Delete',
-                          style: TextStyle(color: Colors.red),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: defaultPadding / 2,
+          vertical: defaultPadding,
+        ),
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              right: 0,
+              top: 0,
+              child: PopupMenuButton(
+                itemBuilder: (context) {
+                  return [
+                    PopupMenuItem(
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return EditProductScreen(productId: widget.productId);
+                          },
                         ),
                       ),
-                    ];
-                  },
-                ),
+                      value: 1,
+                      child: const Text('Edit'),
+                    ),
+                    PopupMenuItem(
+                      onTap: () {},
+                      value: 2,
+                      child: const Text(
+                        'Delete',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ];
+                },
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.network(
-                    // Uri.decodeFull(imageUrl),
-                    Uri.decodeFull("https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"),
-                    width: Responsive.isMobile(context) ? size.width * 0.15 : size.width * 0.08,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.network(
+                  _imageUrl,
+                  width: Responsive.isMobile(context) ? size.width * 0.15 : size.width * 0.08,
+                  height: Responsive.isMobile(context) ? size.width * 0.15 : size.width * 0.08,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                    vertical: 8.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          product != null ? product!.title : 'null',
-                          style: TextStyle(
-                            // fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
-                          ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product != null ? product!.title : 'null',
+                        style: TextStyle(
+                          // fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            product != null
+                                ? product!.isOnSale
+                                    ? product!.salePrice.toString()
+                                    : product!.price.toString()
+                                : 'null',
+                            style: TextStyle(
+                              // fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
+                            ),
+                          ),
+                          if (product != null ? product!.isOnSale : false)
                             Text(
-                              product != null
-                                  ? product!.isOnSale
-                                      ? product!.salePrice.toString()
-                                      : product!.price.toString()
-                                  : 'null',
+                              product!.price.toString(),
                               style: TextStyle(
                                 // fontSize: 18,
                                 fontWeight: FontWeight.w500,
-                                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
+                                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.6),
+                                decoration: TextDecoration.lineThrough,
                               ),
                             ),
-                            if (product != null ? product!.isOnSale : false)
-                              Text(
-                                product!.price.toString(),
-                                style: TextStyle(
-                                  // fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  color: Theme.of(context).colorScheme.onBackground.withOpacity(0.6),
-                                  decoration: TextDecoration.lineThrough,
-                                ),
-                              ),
-                          ],
+                        ],
+                      ),
+                      Text(
+                        product != null ? product!.category : 'null',
+                        style: TextStyle(
+                          // fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
                         ),
-                        Text(
-                          product != null ? product!.category : 'null',
-                          style: TextStyle(
-                            // fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ],
         ),
       ),
     );
