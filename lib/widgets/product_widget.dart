@@ -85,7 +85,10 @@ class _ProductWidgetState extends State<ProductWidget> {
                       child: const Text('Edit'),
                     ),
                     PopupMenuItem(
-                      onTap: () {},
+                      onTap: () => Utils.deleteProduct(
+                        context: context,
+                        productId: widget.productId,
+                      ),
                       value: 2,
                       child: const Text(
                         'Delete',

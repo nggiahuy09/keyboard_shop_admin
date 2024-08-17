@@ -97,7 +97,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           'id': widget.productId,
           'title': _titleController.text.trim(),
           'price': _priceController.text.trim(),
-          'sale_price': _salePriceController.text.trim().isEmpty ? '0.0': _salePriceController.text.trim(),
+          'sale_price': _salePriceController.text.trim().isEmpty ? '0.0' : _salePriceController.text.trim(),
           'image_url': imageUrl,
           'category': _categoryValue,
           'isOnSale': _salePriceController.text.trim().isNotEmpty,
@@ -382,13 +382,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   ButtonWidget(
-                                    onPressed: () {
-                                      if (Navigator.canPop(context)) {
-                                        Navigator.of(context).pop();
-                                      }
-                                    },
-                                    text: 'Cancel',
-                                    icon: Icons.cancel,
+                                    onPressed: () => Utils.deleteProduct(
+                                      context: context,
+                                      productId: widget.productId,
+                                    ),
+                                    text: 'Delete',
+                                    icon: Icons.delete,
                                     backgroundColor: Colors.redAccent,
                                   ),
                                   ButtonWidget(
