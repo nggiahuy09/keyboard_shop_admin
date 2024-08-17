@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,6 +15,7 @@ import 'package:kb_shop_admin/services/uuid_services.dart';
 import 'package:kb_shop_admin/widgets/button.dart';
 import 'package:kb_shop_admin/widgets/custom_widget/cus_loading_widget.dart';
 import 'package:kb_shop_admin/widgets/header.dart';
+import 'package:kb_shop_admin/widgets/input_field_widget.dart';
 import 'package:kb_shop_admin/widgets/side_menu.dart';
 import 'package:provider/provider.dart';
 
@@ -194,7 +194,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              _InputField(
+                              InputField(
                                 title: 'Product Title(*)',
                                 textEditingController: _titleController,
                                 scaffoldColor: scaffoldColor,
@@ -272,7 +272,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                           ],
                                         ),
                                         const SizedBox(height: 16),
-                                        _InputField(
+                                        InputField(
                                           title: 'Price in \$(*)',
                                           textEditingController: _priceController,
                                           scaffoldColor: scaffoldColor,
@@ -284,7 +284,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                         ),
                                         const SizedBox(height: 16),
 
-                                        _InputField(
+                                        InputField(
                                           title: 'Sale Price',
                                           textEditingController: _salePriceController,
                                           scaffoldColor: scaffoldColor,
@@ -297,7 +297,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                         const SizedBox(height: 16),
                                         // drop down category
 
-                                        _InputField(
+                                        InputField(
                                           title: 'Quantity(*)',
                                           textEditingController: _quantityController,
                                           scaffoldColor: scaffoldColor,
@@ -416,71 +416,4 @@ class _AddProductScreenState extends State<AddProductScreen> {
   }
 }
 
-class _InputField extends StatefulWidget {
-  const _InputField({
-    required this.title,
-    required this.textEditingController,
-    required this.scaffoldColor,
-    required this.borderSideColor,
-    required this.validate,
-    this.inputFormatter,
-  });
 
-  final String title;
-  final TextEditingController textEditingController;
-  final Color scaffoldColor, borderSideColor;
-  final String? Function(String? value) validate;
-  final List<TextInputFormatter>? inputFormatter;
-
-  @override
-  State<_InputField> createState() => _InputFieldState();
-}
-
-class _InputFieldState extends State<_InputField> {
-  late final InputDecoration inputDecoration;
-
-  @override
-  void initState() {
-    inputDecoration = InputDecoration(
-      filled: true,
-      fillColor: widget.scaffoldColor,
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0)),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: widget.borderSideColor.withOpacity(0.5),
-          width: 0.75,
-        ),
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-    );
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          widget.title,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.onBackground,
-          ),
-        ),
-        const SizedBox(height: 4),
-        TextFormField(
-          key: const ValueKey('title'),
-          controller: widget.textEditingController,
-          decoration: inputDecoration,
-          inputFormatters: widget.inputFormatter,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.onBackground,
-          ),
-          validator: (value) => widget.validate(value),
-        ),
-      ],
-    );
-  }
-}
