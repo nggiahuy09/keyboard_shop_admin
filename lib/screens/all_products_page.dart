@@ -77,7 +77,7 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
               ),
               desktop: ProductsGridWidget(
                 isInMain: false,
-                childAspectRatio: size.width < 1400 ? 0.7 : 0.95,
+                childAspectRatio: size.width < 1400 ? 0.7 : 0.8,
               ),
             ),
           ],

@@ -87,7 +87,7 @@ class DashboardScreen extends StatelessWidget {
                         ),
                         desktop: ProductsGridWidget(
                           isInMain: true,
-                          childAspectRatio: size.width < 1400 ? 0.7 : 0.95,
+                          childAspectRatio: size.width < 1400 ? 0.7 : 0.8,
                         ),
                       ),
                       const SizedBox(height: defaultPadding),
