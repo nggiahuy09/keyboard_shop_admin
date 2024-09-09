@@ -72,12 +72,12 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
             Responsive(
               mobile: ProductsGridWidget(
                 isInMain: false,
-                crossAxisCount: size.width < 650 ? 2 : 4,
-                childAspectRatio: size.width < 650 && size.width > 350 ? 1 : 0.9,
+                crossAxisCount: Responsive.isMobile(context) ? 2 : 4,
+                childAspectRatio: Responsive.isMobile(context) ? 1.1 : 0.9,
               ),
               desktop: ProductsGridWidget(
                 isInMain: false,
-                childAspectRatio: size.width < 1400 ? 1 : 1.08,
+                childAspectRatio: size.width < 1400 ? 0.7 : 0.95,
               ),
             ),
           ],
