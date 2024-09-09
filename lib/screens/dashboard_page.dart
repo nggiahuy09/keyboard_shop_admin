@@ -92,14 +92,16 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: defaultPadding),
                       Text(
-                        'Latest Orders',
+                        'Latest Orders (5 newest)',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                           color: Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
-                      const OrdersListWidget(),
+                      const OrdersListWidget(
+                        isInMain: true,
+                      ),
                       // MyProductsHome(),
                       // SizedBox(height: defaultPadding),
                       // OrdersScreen(),

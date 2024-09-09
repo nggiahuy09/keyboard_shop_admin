@@ -68,7 +68,9 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
               isAllowPop: false,
             ),
             const SizedBox(height: defaultPadding),
-            const OrdersListWidget(),
+            const OrdersListWidget(
+              isInMain: false,
+            ),
           ],
         ),
       ),

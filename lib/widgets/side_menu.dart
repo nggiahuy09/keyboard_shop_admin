@@ -43,7 +43,7 @@ class _SideMenuWidgetSate extends State<SideMenuWidget> {
             icon: Icons.home_filled,
           ),
           DrawerListTileWidget(
-            title: "View all product",
+            title: "View all products",
             press: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
@@ -54,7 +54,7 @@ class _SideMenuWidgetSate extends State<SideMenuWidget> {
             icon: Icons.store,
           ),
           DrawerListTileWidget(
-            title: "View all order",
+            title: "View all orders",
             press: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
