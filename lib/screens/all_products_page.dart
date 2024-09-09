@@ -66,6 +66,7 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
             HeaderWidget(
               fct: () => context.read<MenuControllers>().controlProductsMenu(),
               title: 'All Products',
+              isAllowPop: false,
             ),
             const SizedBox(height: defaultPadding),
             Responsive(

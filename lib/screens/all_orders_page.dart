@@ -65,6 +65,7 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
               fct: () => context.read<MenuControllers>().controlOrdersMenu(),
               title: 'All Orders',
               isAllowSearch: false,
+              isAllowPop: false,
             ),
             const SizedBox(height: defaultPadding),
             const OrdersListWidget(),

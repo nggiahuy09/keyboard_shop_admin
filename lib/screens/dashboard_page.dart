@@ -27,6 +27,7 @@ class DashboardScreen extends StatelessWidget {
             HeaderWidget(
               title: 'Dashboard',
               fct: () => context.read<MenuControllers>().controlDashboardMenu(),
+              isAllowPop: false,
             ),
             const SizedBox(height: defaultPadding),
             Row(

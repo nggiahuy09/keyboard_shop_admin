@@ -9,11 +9,13 @@ class HeaderWidget extends StatelessWidget {
     required this.fct,
     required this.title,
     this.isAllowSearch = true,
+    this.isAllowPop = true,
   });
 
   final Function fct;
   final String title;
   final bool isAllowSearch;
+  final bool isAllowPop;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +34,27 @@ class HeaderWidget extends StatelessWidget {
         if (Responsive.isDesktop(context))
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
+            child: Row(
+              children: [
+                if (isAllowPop)
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: () => Navigator.canPop(context) ? Navigator.pop(context) : () {},
+                      ),
+                      const SizedBox(width: 6),
+                    ],
+                  ),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                ),
+              ],
             ),
           ),
         if (Responsive.isDesktop(context)) Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
