@@ -11,13 +11,13 @@ import 'package:kb_shop_admin/controllers/menu_controller.dart';
 import 'package:kb_shop_admin/responsive.dart';
 import 'package:kb_shop_admin/services/firebase_services.dart';
 import 'package:kb_shop_admin/services/utils.dart';
-import 'package:kb_shop_admin/services/uuid_services.dart';
 import 'package:kb_shop_admin/widgets/button.dart';
 import 'package:kb_shop_admin/widgets/custom_widget/cus_loading_widget.dart';
 import 'package:kb_shop_admin/widgets/header.dart';
 import 'package:kb_shop_admin/widgets/input_field_widget.dart';
 import 'package:kb_shop_admin/widgets/side_menu.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -54,6 +54,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
         return;
       }
 
+      var uuidV4 = const Uuid().v4();
       final ref = fireStorageInstance.ref().child('ProductImages').child('_$uuidV4.jpg');
 
       if (kIsWeb) {
@@ -80,6 +81,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
         Utils.showToast(msg: 'Add Product Successfully');
         _clearForm();
+        uuidV4 = '';
 
         setState(() {
           _isLoading = false;
