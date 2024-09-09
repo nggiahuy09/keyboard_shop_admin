@@ -56,7 +56,8 @@ class Utils {
           price: documentSnapshot.get('price'),
           quantity: documentSnapshot.get('quantity'),
           salePrice: documentSnapshot.get('sale_price'),
-          isOnSale: documentSnapshot.get('isOnSale'),
+          isOnSale: documentSnapshot.get('is_on_sale'),
+          productInfo: documentSnapshot.get('product_information'),
         );
 
         return product;

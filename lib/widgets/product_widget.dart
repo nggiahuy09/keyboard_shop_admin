@@ -130,8 +130,8 @@ class _ProductWidgetState extends State<ProductWidget> {
                           Text(
                             product != null
                                 ? product!.isOnSale
-                                    ? product!.salePrice.toString()
-                                    : product!.price.toString()
+                                    ? 'Price (\$): ${product!.salePrice.toString()}'
+                                    : 'Price (\$): ${product!.price.toString()}'
                                 : 'null',
                             style: TextStyle(
                               // fontSize: 18,
@@ -152,7 +152,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                         ],
                       ),
                       Text(
-                        product != null ? product!.category : 'null',
+                        product != null ? 'Category: ${product!.category}' : 'null',
                         style: TextStyle(
                           // fontSize: 18,
                           fontWeight: FontWeight.w500,

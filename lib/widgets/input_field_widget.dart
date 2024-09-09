@@ -9,6 +9,7 @@ class InputField extends StatefulWidget {
     required this.scaffoldColor,
     required this.borderSideColor,
     required this.validate,
+    this.maxLines = 1,
     this.inputFormatter,
   });
 
@@ -17,6 +18,7 @@ class InputField extends StatefulWidget {
   final Color scaffoldColor, borderSideColor;
   final String? Function(String? value) validate;
   final List<TextInputFormatter>? inputFormatter;
+  final int? maxLines;
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -65,6 +67,7 @@ class _InputFieldState extends State<InputField> {
             color: Theme.of(context).colorScheme.onBackground,
           ),
           validator: (value) => widget.validate(value),
+          maxLines: widget.maxLines,
         ),
       ],
     );

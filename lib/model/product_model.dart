@@ -5,6 +5,7 @@ class ProductModel {
   String price;
   String salePrice;
   String quantity;
+  String productInfo;
   bool isOnSale;
 
   ProductModel({
@@ -12,8 +13,9 @@ class ProductModel {
     required this.imageUrl,
     required this.category,
     required this.price,
-    this.salePrice = '0.0',
     required this.quantity,
+    required this.productInfo,
+    this.salePrice = '0.0',
     this.isOnSale = false,
   });
 }

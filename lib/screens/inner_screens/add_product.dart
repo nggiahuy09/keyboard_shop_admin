@@ -29,7 +29,7 @@ class AddProductScreen extends StatefulWidget {
 class _AddProductScreenState extends State<AddProductScreen> {
   final _addProductKey = GlobalKey<FormState>();
 
-  late final TextEditingController _titleController, _priceController, _quantityController, _salePriceController;
+  late final TextEditingController _titleController, _priceController, _quantityController, _salePriceController, _proInfoController;
 
   String _categoryValue = 'Keyboard';
   File? _pickedImage;
@@ -72,8 +72,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
           'sale_price': _salePriceController.text.trim().isEmpty ? '0.0': _salePriceController.text.trim(),
           'image_url': imageUrl,
           'category': _categoryValue,
-          'isOnSale': _salePriceController.text.trim().isNotEmpty,
+          'is_on_sale': _salePriceController.text.trim().isNotEmpty,
           'quantity': _quantityController.text.trim(),
+          'product_information': _proInfoController.text.trim(),
           'last_modify': Timestamp.now(),
         });
 
@@ -105,6 +106,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
     _priceController = TextEditingController();
     _quantityController = TextEditingController();
     _salePriceController = TextEditingController();
+    _proInfoController = TextEditingController();
+
     super.initState();
   }
 
@@ -114,6 +117,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
     _priceController.dispose();
     _quantityController.dispose();
     _salePriceController.dispose();
+    _proInfoController.dispose();
+
     super.dispose();
   }
 
@@ -122,6 +127,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     _priceController.clear();
     _quantityController.clear();
     _salePriceController.clear();
+    _proInfoController.clear();
     _pickedImage = null;
     _webImage = null;
   }
@@ -201,7 +207,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 borderSideColor: color,
                                 validate: (value) => value!.isEmpty ? 'Title is missed!' : null,
                               ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 12),
+
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -271,7 +278,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                             ),
                                           ],
                                         ),
-                                        const SizedBox(height: 16),
+                                        const SizedBox(height: 8),
+
                                         InputField(
                                           title: 'Price in \$(*)',
                                           textEditingController: _priceController,
@@ -282,7 +290,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                             Utils(context).numberInputFormatter,
                                           ],
                                         ),
-                                        const SizedBox(height: 16),
+                                        const SizedBox(height: 8),
 
                                         InputField(
                                           title: 'Sale Price',
@@ -294,8 +302,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                             Utils(context).numberInputFormatter,
                                           ],
                                         ),
-                                        const SizedBox(height: 16),
-                                        // drop down category
+                                        const SizedBox(height: 8),
 
                                         InputField(
                                           title: 'Quantity(*)',
@@ -307,10 +314,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                             Utils(context).numberInputFormatter,
                                           ],
                                         ),
+                                        const SizedBox(height: 8),
+
+                                        InputField(
+                                          title: 'Information(*)',
+                                          textEditingController: _proInfoController,
+                                          scaffoldColor: scaffoldColor,
+                                          borderSideColor: color,
+                                          validate: (value) => value!.isEmpty ? 'Information is missed!' : null,
+                                          maxLines: null,
+                                        ),
                                       ],
                                     ),
                                   ),
-                                  const SizedBox(width: 16),
+                                  const SizedBox(width: 12),
+
                                   Flexible(
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.center,
