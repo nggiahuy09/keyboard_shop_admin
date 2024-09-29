@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kb_shop_admin/consts/constants.dart';
 import 'package:kb_shop_admin/controllers/menu_controller.dart';
 import 'package:kb_shop_admin/responsive.dart';
-import 'package:kb_shop_admin/screens/all_products_page.dart';
-import 'package:kb_shop_admin/screens/inner_screens/add_product.dart';
 import 'package:kb_shop_admin/services/utils.dart';
 import 'package:kb_shop_admin/widgets/button.dart';
 import 'package:kb_shop_admin/widgets/grid_products.dart';
@@ -50,26 +48,14 @@ class DashboardScreen extends StatelessWidget {
                           Row(
                             children: [
                               ButtonWidget(
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) {
-                                      return const AllProductsScreen();
-                                    },
-                                  ));
-                                },
+                                onPressed: () => Navigator.pushNamed(context, '/all_products'),
                                 text: 'View All',
                                 icon: Icons.store,
                                 backgroundColor: Theme.of(context).primaryColor,
                               ),
                               const Spacer(),
                               ButtonWidget(
-                                onPressed: () => Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return const AddProductScreen();
-                                    },
-                                  ),
-                                ),
+                                onPressed: () => Navigator.pushNamed(context, '/dashboard/add_product'),
                                 text: 'Add New',
                                 icon: Icons.plus_one,
                                 backgroundColor: Theme.of(context).primaryColor,

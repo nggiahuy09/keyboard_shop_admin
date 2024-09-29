@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:kb_shop_admin/provider/dark_theme_provider.dart';
-import 'package:kb_shop_admin/screens/all_orders_page.dart';
-import 'package:kb_shop_admin/screens/all_products_page.dart';
-import 'package:kb_shop_admin/screens/main_page.dart';
 import 'package:kb_shop_admin/services/utils.dart';
 import 'package:provider/provider.dart';
 
@@ -33,46 +30,31 @@ class _SideMenuWidgetSate extends State<SideMenuWidget> {
           ),
           DrawerListTileWidget(
             title: "Dashboard",
-            press: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => const MainScreen(),
-                ),
-              );
-            },
+            press: () => Navigator.pushNamed(context, '/dashboard'),
             icon: Icons.home_filled,
           ),
           DrawerListTileWidget(
             title: "View all products",
-            press: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => const AllProductsScreen(),
-                ),
-              );
-            },
+            press: () => Navigator.pushNamed(context, '/all_products'),
             icon: Icons.store,
           ),
           DrawerListTileWidget(
             title: "View all orders",
-            press: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => const AllOrdersScreen(),
-                ),
-              );
-            },
+            press: () => Navigator.pushNamed(context, '/all_orders'),
             icon: IconlyBold.bag_2,
           ),
           SwitchListTile(
-              title: const Text('Theme'),
-              secondary: Icon(themeState.getDarkTheme ? Icons.dark_mode_outlined : Icons.light_mode_outlined),
-              value: theme,
-              onChanged: (value) {
-                setState(() {
-                  themeState.setDarkTheme = value;
-                });
-              })
+            title: const Text('Theme'),
+            secondary: Icon(themeState.getDarkTheme
+                ? Icons.dark_mode_outlined
+                : Icons.light_mode_outlined),
+            value: theme,
+            onChanged: (value) {
+              setState(() {
+                themeState.setDarkTheme = value;
+              });
+            },
+          )
         ],
       ),
     );
@@ -101,7 +83,6 @@ class DrawerListTileWidget extends StatelessWidget {
         icon,
         size: 20,
       ),
-
       title: Text(
         title,
         style: const TextStyle(

@@ -74,12 +74,10 @@ class _ProductWidgetState extends State<ProductWidget> {
                 itemBuilder: (context) {
                   return [
                     PopupMenuItem(
-                      onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return EditProductScreen(productId: widget.productId);
-                          },
-                        ),
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        '/dashboard/edit_product',
+                        arguments: widget.productId,
                       ),
                       value: 1,
                       child: const Text('Edit'),
@@ -104,8 +102,12 @@ class _ProductWidgetState extends State<ProductWidget> {
               children: [
                 Image.network(
                   _imageUrl,
-                  width: Responsive.isMobile(context) ? size.width * 0.15 : size.width * 0.08,
-                  height: Responsive.isMobile(context) ? size.width * 0.15 : size.width * 0.08,
+                  width: Responsive.isMobile(context)
+                      ? size.width * 0.15
+                      : size.width * 0.08,
+                  height: Responsive.isMobile(context)
+                      ? size.width * 0.15
+                      : size.width * 0.08,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -136,7 +138,10 @@ class _ProductWidgetState extends State<ProductWidget> {
                             style: TextStyle(
                               // fontSize: 18,
                               fontWeight: FontWeight.w500,
-                              color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onBackground
+                                  .withOpacity(0.7),
                             ),
                           ),
                           if (product != null ? product!.isOnSale : false)
@@ -145,18 +150,26 @@ class _ProductWidgetState extends State<ProductWidget> {
                               style: TextStyle(
                                 // fontSize: 18,
                                 fontWeight: FontWeight.w500,
-                                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.6),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onBackground
+                                    .withOpacity(0.6),
                                 decoration: TextDecoration.lineThrough,
                               ),
                             ),
                         ],
                       ),
                       Text(
-                        product != null ? 'Category: ${product!.category}' : 'null',
+                        product != null
+                            ? 'Category: ${product!.category}'
+                            : 'null',
                         style: TextStyle(
                           // fontSize: 18,
                           fontWeight: FontWeight.w500,
-                          color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onBackground
+                              .withOpacity(0.7),
                         ),
                       ),
                     ],
